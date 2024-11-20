@@ -206,12 +206,12 @@
     <header><h1>short</h1></header>
     <main x-data="app" x-cloak>
       <p x-show.transition.opacity="alert" :class="alert?.type" x-text="alert?.message"></p>
-      <input placeholder="输入要缩短的网址..." x-model="url" x-ref="url" />
+      <input placeholder="Enter the URL to shorten..." x-model="url" x-ref="url" />
       <details>
-        <summary>自定义设置</summary>
+        <summary>Custom settings</summary>
         <div>
           <input placeholder="slug" x-model="slug" />
-          <small>Slug 默认是随机生成的短 id。</small>
+          <small>Slug The default is a randomly generated short link. id。</small>
         </div>
       </details>
       <button :class="{ loading }" :disabled="loading || isValidated()" @click="submit($refs, $nextTick)">生成</button>
@@ -231,12 +231,12 @@
         },
         submit ($refs, $nextTick) {
           if (!this.url) {
-            this.alert = { type: 'error', message: '缺少必需的参数：url。' }
+            this.alert = { type: 'error', message: 'Missing required parameters：url。' }
             return
           }
 
           if (this.isValidated()) {
-            this.alert = { type: 'error', message: '非法格式：url。' }
+            this.alert = { type: 'error', message: 'Invalid format：url。' }
             return
           }
 
@@ -263,7 +263,7 @@
 
               $nextTick(() => {
                 $refs.url.select()
-                this.alert = { type: 'success', message: `链接 ${document.execCommand('Copy') ? '复制' : '生成'} ` }
+                this.alert = { type: 'success', message: `链接 ${document.execCommand('Copy') ? 'Copy' : 'Generate'} ` }
               })
             })
             .catch(e => {
