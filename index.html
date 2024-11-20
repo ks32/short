@@ -263,7 +263,7 @@
 
               $nextTick(() => {
                 $refs.url.select()
-                this.alert = { type: 'success', message: `链接 ${document.execCommand('Copy') ? 'Copy' : 'Generate'} ` }
+                this.alert = { type: 'success', message: `Link ${document.execCommand('Copy') ? 'Copy' : 'Generate'} ` }
               })
             })
             .catch(e => {
