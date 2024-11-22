@@ -11,7 +11,7 @@ export async function onRequestGet(context) {
     const Referer = request.headers.get('Referer') || "Referer"
     const originurl = new URL(request.url);
     const options = {
-        timeZone: 'Asia/Shanghai',
+        timeZone: 'Asia/Karachi',
         year: 'numeric',
         month: 'long',
         day: 'numeric',
@@ -21,7 +21,7 @@ export async function onRequestGet(context) {
         second: '2-digit'
     };
     const timedata = new Date();
-    const formattedDate = new Intl.DateTimeFormat('zh-CN', options).format(timedata);
+    const formattedDate = new Intl.DateTimeFormat('en-PK', options).format(timedata);
 
     const slug = params.id;
 
