@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.pakdata.QuranMajeed",
+      "sha256_cert_fingerprints": [
+        "39:FF:2E:E4:A0:47:FE:D0:BE:23:A2:3F:55:9A:70:C4:93:1B:CE:CF:6F:A9:4D:2E:8F:43:EE:83:4D:AD:0E:11"
+      ]
+    }
+  }
+]
