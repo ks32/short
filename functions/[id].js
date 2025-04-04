@@ -39,7 +39,18 @@ export async function onRequestGet(context) {
             const info = await env.DB.prepare(`INSERT INTO logs (url, slug, ip,referer,  ua, create_time) 
             VALUES ('${Url.url}', '${slug}', '${clientIP}','${Referer}', '${userAgent}', '${formattedDate}')`).run()
             // console.log(info);
-            return Response.redirect(Url.url, 302);
+            let redirectUrl = Url.url;
+            if (/android/i.test(userAgent)) {
+                // Android: Try opening the app, fallback to Play Store
+                redirectUrl = `https://play.google.com/store/apps/details?id=com.pakdata.QuranMajeed&hl=en`;
+            } else if (/iphone|ipad|ipod/i.test(userAgent)) {
+                // iOS: Try opening the app, fallback to App Store
+                redirectUrl = "https://apps.apple.com/us/app/quran-majeed-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id365557665";
+            } else {
+                // Web/Desktop fallback
+                redirectUrl = "https://quranmajeed.com/";
+            }
+            return Response.redirect(redirectUrl, 302);
             
         } catch (error) {
             console.log(error);

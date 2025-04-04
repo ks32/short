@@ -135,3 +135,9 @@ wrangler.toml
 .wrangler/*
 
 .wrangler
+
+vitest.config.js
+
+wrangler.jsonc
+
+package-lock.json
