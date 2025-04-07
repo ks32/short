@@ -1,0 +1,52 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "H5S463E67U.com.pakdata.QuranMajeed",
+                "paths": [
+                    "NOT /__/auth/action/",
+                    "NOT /__/auth/handler/",
+                    "NOT /_/*",
+                    "/*"
+                ]
+            },
+            {
+                "appID": "5687D332U4.com.pakdata.QuranMajeedLite",
+                "paths": [
+                    "NOT /__/auth/action/",
+                    "NOT /__/auth/handler/",
+                    "NOT /_/*",
+                    "/*"
+                ]
+            },
+            {
+                "appID": "83C9NGPAZ4.com.pakdata.QuranMajeedMac",
+                "paths": [
+                    "NOT /__/auth/action/",
+                    "NOT /__/auth/handler/",
+                    "NOT /_/*",
+                    "/*"
+                ]
+            },
+            {
+                "appID": "83C9NGPAZ4.com.pakdata.QuranPak",
+                "paths": [
+                    "NOT /__/auth/action/",
+                    "NOT /__/auth/handler/",
+                    "NOT /_/*",
+                    "/*"
+                ]
+            },
+            {
+                "appID": "S4XVV3LCHG.com.pakdata.TafseerKatheer",
+                "paths": [
+                    "NOT /__/auth/action/",
+                    "NOT /__/auth/handler/",
+                    "NOT /_/*",
+                    "/*"
+                ]
+            }
+        ]
+    }
+}
