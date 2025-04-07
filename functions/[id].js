@@ -2,7 +2,7 @@
  * @param {string} slug
  */
 import page404 from './404.html'
-
+import appleAppSiteAssociation from '../apple-app-site-association.json';
 export async function onRequestGet(context) {
     const { request, env, params } = context;
     // const url = new URL(request.url);
@@ -24,7 +24,14 @@ export async function onRequestGet(context) {
     const formattedDate = new Intl.DateTimeFormat('en-PK', options).format(timedata);
 
     const slug = params.id;
-
+    if (request.url.includes('/apple-app-site-association')) {
+        return new Response(JSON.stringify(appleAppSiteAssociation), {
+            status: 200,
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+    }
     const Url = await env.DB.prepare(`SELECT url FROM links where slug = '${slug}'`).first()
 
     if (!Url) {
