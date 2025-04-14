@@ -59,10 +59,23 @@ export async function onRequest(context) {
 
             // url & slug 是一样的。
             if (existUrl && existUrl.existUrl) {
-                return Response.json({ slug, link: `${existUrl.existUrl}` }, {
+                // return Response.json({ slug, link: `${existUrl.existUrl}` }, {
+                //     headers: corsHeaders,
+                //     status: 200
+                // })
+                const response = Response.json({ slug, link: existUrl.existUrl }, {
                     headers: corsHeaders,
                     status: 200
-                })
+                });
+
+                // Then asynchronously update the count (non-blocking)
+                context.waitUntil(
+                    env.DB.prepare(`UPDATE links SET opened = opened + 1 WHERE slug = ?`)
+                        .bind(slug)
+                        .run()
+                );
+
+                return response;
             }
         }
         else{
