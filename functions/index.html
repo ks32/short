@@ -232,10 +232,17 @@
       border: none;
       background-color: #e53e3e;
       color: white;
-      border-radius: 6px;
+      border-radius: 4px;
       cursor: pointer;
       transition: background 0.3s;
       margin-top: 8px;
+      appearance: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 5rem;
+      padding: .5rem .75rem;
     }
 
     .logout:hover {
@@ -256,6 +263,11 @@
     <div class="left">
       <img src="asset/img/favicon.png" alt="Link icon" class="icon" />
       <span class="title">Short URL</span>
+      <div style="margin-top: 7px;">
+        <a href="/links" target="_self">  
+          <button >Show URL List</button>
+        </a>
+      </div>
     </div>
     <div class="right">
       <div style="display: flex; justify-content: center; gap: 2;">
@@ -313,6 +325,10 @@
       credentials: 'include'
     });
     window.location.href = '/login';
+  }
+
+  function ShowLink(){
+    window.location.href("/links");
   }
   </script>
   <script>
