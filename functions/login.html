@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - Smart Short Links</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+    }
+    h1 {
+      margin-bottom: 16px;
+      font-size: 26px;
+      color: #333;
+      line-height: 1.4;
+    }
+    p {
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 30px;
+      line-height: 1.8;
+    }
+    .google-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      background: #fff;
+      color: #444;
+      font-size: 16px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      transition: background 0.3s ease;
+    }
+    .google-btn:hover {
+      background-color: #f1f1f1;
+    }
+    .google-btn img {
+      height: 20px;
+      margin-right: 10px;
+    }
+    form {
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Smarter Links for Smart Apps</h1>
+    <p>Create powerful, short dynamic links from long app URLs.<br>
+    A fast, scalable, and user-friendly alternative to Firebase Dynamic Links.</p>
+
+    <form method="GET" action="/auth/login">
+      <button class="google-btn" type="submit">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo" />
+        Sign in with Google
+      </button>
+    </form>
+  </div>
+</body>
+</html>
