@@ -1,6 +1,6 @@
 export async function onRequestGet(context) {
-  const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-  const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+  const  GOOGLE_CLIENT_ID = context.env.client_id;
+  const GOOGLE_CLIENT_SECRET = context.env.client_secret;
 
   const url = new URL(context.request.url);
   const origin = url.origin;
