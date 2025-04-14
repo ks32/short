@@ -1,6 +1,5 @@
 export async function onRequestGet(context) {
   // const { GOOGLE_CLIENT_ID, GOOGLE_REDIRECT_URI } = context.env;
-  debugger
   const  GOOGLE_CLIENT_ID = context.env.client_id;
   const GOOGLE_CLIENT_SECRET = context.env.client_secret;
   const url = new URL(context.request.url);

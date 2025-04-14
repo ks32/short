@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>All Links</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+      background: #f9f9f9;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    th, td {
+      padding: 1rem;
+      border: 1px solid #eaeaea;
+      text-align: left;
+    }
+
+    th {
+      background: #f1f3f5;
+    }
+
+    caption {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <table id="links-table">
+    <caption>All Short Links</caption>
+    <thead>
+      <tr>
+        <th>Slug</th>
+        <th>Original URL</th>
+        <th>Short Link</th>
+        <th>Total Clicked</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    // fetch('/links')
+    console.log(window.location)
+    fetch('/linklist', {
+          method: 'GET',
+          headers: { 'content-type': 'application/json' }
+        })
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.querySelector('#links-table tbody');
+        console.log(data)
+        data.forEach(link => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${link.slug}</td>
+            <td><a href="${link.url}" target="_blank">${link.url}</a></td>
+            <td><a href="${window.location.origin}/${link.slug}" target="_blank">${window.location.origin}/${link.slug}</a></td>
+            <td></td>
+          `;
+          tbody.appendChild(tr);
+        });
+      });
+  </script>
+</body>
+</html>

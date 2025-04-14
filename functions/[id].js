@@ -1,6 +1,7 @@
 import page404 from './404.html';
 import login from './login.html';
 import home from './index.html';
+import link from './links.html';
 import appleAppSiteAssociation from '../apple-app-site-association.json';
 
 export async function onRequestGet(context) {
@@ -8,8 +9,8 @@ export async function onRequestGet(context) {
   const url = new URL(request.url);
   const pathname = url.pathname;
   const reservedRoutes = {
-    login: "login.html",
-    about: "about.html",
+    login: login,
+    links: link,
     contact: "contact.html",
   };
 
@@ -28,7 +29,7 @@ export async function onRequestGet(context) {
     }
   }
   if (reservedRoutes[params.id]) {
-    return new Response(login, {
+    return new Response(reservedRoutes[params.id], {
       status: 200,
       headers: { "Content-Type": "text/html;charset=UTF-8" },
     });

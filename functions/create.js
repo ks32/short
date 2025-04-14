@@ -35,7 +35,7 @@ export async function onRequest(context) {
     const origin = `${originurl.protocol}//${originurl.hostname}`
 
     const options = {
-        timeZone: 'Asia/Shanghai',
+        timeZone: 'Asia/Karachi',
         year: 'numeric',
         month: 'long',
         day: 'numeric',
@@ -45,7 +45,7 @@ export async function onRequest(context) {
         second: '2-digit'
     };
     const timedata = new Date();
-    const formattedDate = new Intl.DateTimeFormat('zh-CN', options).format(timedata);
+    const formattedDate = new Intl.DateTimeFormat('en-PK', options).format(timedata);
     const { url, slug } = await request.json();
     const corsHeaders = {
         'Access-Control-Allow-Origin': '*',
