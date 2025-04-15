@@ -110,12 +110,12 @@ export async function onRequest(context) {
         }
         const bodyUrl = new URL(url);
 
-        if (bodyUrl.hostname === originurl.hostname) {
-            return Response.json({ message: 'You cannot shorten a link to the same domain.' }, {
-                headers: corsHeaders,
-                status: 400
-            })
-        }
+        // if (bodyUrl.hostname === originurl.hostname) {
+        //     return Response.json({ message: 'You cannot shorten a link to the same domain.' }, {
+        //         headers: corsHeaders,
+        //         status: 400
+        //     })
+        // }
 
         // 生成随机slug
         const slug2 = slug ? slug : generateRandomString(4);
