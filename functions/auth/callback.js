@@ -29,7 +29,7 @@ export async function onRequestGet(context) {
     headers: { Authorization: `Bearer ${access_token}` }
   });
   const user = await userRes.json();
-debugger
+
   // Step 3: Set cookies (token is HttpOnly, user info is accessible)
   if (users.includes(user.email)) {
 
