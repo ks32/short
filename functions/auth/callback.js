@@ -1,6 +1,7 @@
 export async function onRequestGet(context) {
-  const  GOOGLE_CLIENT_ID = context.env.client_id;
+  const GOOGLE_CLIENT_ID = context.env.client_id;
   const GOOGLE_CLIENT_SECRET = context.env.client_secret;
+  const users = context.env.users;
 
   const url = new URL(context.request.url);
   const origin = url.origin;
@@ -30,20 +31,29 @@ export async function onRequestGet(context) {
   const user = await userRes.json();
 
   // Step 3: Set cookies (token is HttpOnly, user info is accessible)
-  const expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString(); // 24 hours
+  if (users.includes(user.email)) {
 
-  const headers = new Headers();
-  headers.append('Set-Cookie', `token=${access_token}; Path=/; HttpOnly; Secure; SameSite=Lax; Expires=${expires}`);
-  headers.append('Set-Cookie', `user=${encodeURIComponent(JSON.stringify({
-    name: user.name,
-    email: user.email,
-    picture: user.picture
-  }))}; Path=/; Secure; SameSite=Lax; Expires=${expires}`);
-  
-  headers.set('Location', '/');
+    const expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString(); // 24 hours
 
-  return new Response(null, {
-    status: 302,
-    headers
-  });
+    const headers = new Headers();
+    headers.append('Set-Cookie', `token=${access_token}; Path=/; HttpOnly; Secure; SameSite=Lax; Expires=${expires}`);
+    headers.append('Set-Cookie', `user=${encodeURIComponent(JSON.stringify({
+      name: user.name,
+      email: user.email,
+      picture: user.picture
+    }))}; Path=/; Secure; SameSite=Lax; Expires=${expires}`);
+
+    headers.set('Location', '/');
+
+    return new Response(null, {
+      status: 302,
+      headers
+    });
+  }
+  else {
+    const loginUrl = new URL('/login', context.request.url);
+    loginUrl.searchParams.set('unauthenticate', 'error');
+
+    return Response.redirect(loginUrl, 302);
+  }
 }

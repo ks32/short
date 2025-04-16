@@ -61,6 +61,13 @@
       justify-content: center;
     }
   </style>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get("unauthenticate");
+    if (error) {
+      alert("ACCESS DENIED\n\nYou are not authorized to access this application.\nPlease contact the project administrator for access.");
+    }
+  </script>
 </head>
 <body>
   <div class="container">
