@@ -5,7 +5,6 @@
 // Path: functions/create.js
 
 export async function onRequest(context) {
-    console.log(context)
     if (context.request.method === 'OPTIONS') {
         return new Response(null, {
             headers: {
@@ -18,23 +17,6 @@ export async function onRequest(context) {
     }
     // export async function onRequestPost(context) {
     const { request, env } = context;
-    const originurl = new URL(request.url);
-    const clientIP = request.headers.get("x-forwarded-for") || request.headers.get("clientIP");
-    const userAgent = request.headers.get("user-agent");
-    const origin = `${originurl.protocol}//${originurl.hostname}`
-
-    const options = {
-        timeZone: 'Asia/Shanghai',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour12: false,
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-    };
-    const timedata = new Date();
-    const formattedDate = new Intl.DateTimeFormat('zh-CN', options).format(timedata);
     const { slug } = await request.json();
     const corsHeaders = {
         'Access-Control-Allow-Origin': '*',
@@ -55,7 +37,7 @@ export async function onRequest(context) {
 
         // 如果自定义slug
         if (slug) {
-            const existUrl = await env.DB.prepare(`SELECT url as existUrl FROM links where slug = '${slug}'`).first()
+            const existUrl = await env.DB.prepare(`SELECT url as existUrl FROM links where slug = ?`).bind(slug).first()
 
             // url & slug 是一样的。
             if (existUrl && existUrl.existUrl) {
