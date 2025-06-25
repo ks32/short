@@ -44,6 +44,7 @@
         <th>Original URL</th>
         <th>Short Link</th>
         <th>Total Clicked</th>
+        <th>Domain</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -65,8 +66,9 @@
           tr.innerHTML = `
             <td>${link.slug}</td>
             <td><a href="${link.url}" target="_blank">${link.url}</a></td>
-            <td><a href="${window.location.origin}/${link.slug}" target="_blank">${window.location.origin}/${link.slug}</a></td>
+            <td><a href="${link.domain}/${link.slug}" target="_blank">${window.location.origin}/${link.slug}</a></td>
             <td>${link.opened}</td>
+            <td>${link.domain}</td>
           `;
           tbody.appendChild(tr);
         });
