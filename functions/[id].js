@@ -75,7 +75,7 @@ export async function onRequestGet(context) {
     ).run();
 
     let redirectUrl = Url.url;
-    if(origin === "http://g.quranmajeed.com"){
+    if(origin === "https://g.quranmajeed.com"){
       if (/android/i.test(userAgent)) {
         redirectUrl = `https://play.google.com/store/apps/details?id=com.pakdata.QuranMajeed&hl=en`;
       } else if (/iphone|ipad|ipod/i.test(userAgent)) {
@@ -84,7 +84,7 @@ export async function onRequestGet(context) {
         redirectUrl = "https://quranmajeed.com/";
       }
     }
-    else if(origin === "http://g.kitabi.pk"){
+    else if(origin === "https://g.kitabi.pk"){
       if (/android/i.test(userAgent)) {
         redirectUrl = `https://play.google.com/store/apps/details?id=com.pakdata.kitabi`;
       } 
@@ -96,7 +96,7 @@ export async function onRequestGet(context) {
       }
     }
     else{
-      redirectUrl = "https://pakdata.com/";
+      redirectUrl = "https://quranmajeed.com/";
     }
 
     return Response.redirect(redirectUrl, 302);
