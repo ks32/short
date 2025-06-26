@@ -68,6 +68,6 @@ curl -X POST -H "Content-Type: application/json" -d '{"url":"https://131213.xyz"
   "link": "http://d.131213.xyz/<slug>"
 }
 ```
-
+<!-- create separate cloudflare pages for separate app -->
 
 
