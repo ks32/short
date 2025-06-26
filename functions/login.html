@@ -23,6 +23,10 @@
       max-width: 420px;
       width: 100%;
     }
+    .app-logo {
+      height: 60px;
+      margin-bottom: 20px;
+    }
     h1 {
       margin-bottom: 16px;
       font-size: 26px;
@@ -62,15 +66,37 @@
     }
   </style>
   <script>
+    // Show alert if unauthorized
     const params = new URLSearchParams(window.location.search);
     const error = params.get("unauthenticate");
     if (error) {
       alert("ACCESS DENIED\n\nYou are not authorized to access this application.\nPlease contact the project administrator for access.");
     }
+
+    // Set logo based on domain
+    window.onload = function () {
+      const hostname = window.location.hostname;
+      const logoImg = document.getElementById("appLogo");
+
+      if (hostname === "g.quranmajeed.com") {
+        logoImg.src = "asset/img/gm-logo.png";
+        logoImg.alt = "Quran Majeed Logo";
+      } else if (hostname === "g.kitabi.pk") {
+        logoImg.src = "asset/img/kitabi-logo.webp";
+        logoImg.alt = "Kitabi Logo";
+      } else if (hostname === "e.pakdata.com") {
+        logoImg.src = "asset/img/easyurdu-logo.jpg";
+        logoImg.alt = "Easy Urdu Logo";
+      } else {
+        logoImg.src = "asset/img/pdms-logo.png";
+        logoImg.alt = "Pakistan Data Management Services Logo";
+      }
+    };
   </script>
 </head>
 <body>
   <div class="container">
+    <img id="appLogo" class="app-logo" src="" alt="App Logo" />
     <h1>Smarter Links for Smart Apps</h1>
     <p>Create powerful, short dynamic links from long app URLs.<br>
     A fast, scalable, and user-friendly alternative to Firebase Dynamic Links.</p>
