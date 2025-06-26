@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" href="asset/img/favicon.png">
+  <link id="favicon" rel="icon" href="asset/img/favicon.png" type="image/png">
   <title>All Links</title>
   <style>
     body {
@@ -36,6 +36,24 @@
   </style>
 </head>
 <body>
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const hostname = window.location.hostname;
+      const favicon = document.getElementById("favicon");
+
+      let logoPath = "asset/img/pdms-logo.png";
+
+      if (hostname === "g.quranmajeed.com") {
+        logoPath = "asset/img/qm-logo.png";
+      } else if (hostname === "g.kitabi.pk") {
+        logoPath = "asset/img/kitabi-logo.webp";
+      } else if (hostname === "e.pakdata.com") {
+        logoPath = "asset/img/easyurdu-logo.jpg";
+      }
+      favicon.href = logoPath;
+    });
+  </script>
+
   <table id="links-table">
     <caption>All Short Links</caption>
     <thead>

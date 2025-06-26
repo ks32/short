@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" href="asset/img/favicon.png">
+  <link id="favicon" rel="icon" href="asset/img/favicon.png" type="image/png">
   <title>Login - Smart Short Links</title>
   <style>
     body {
@@ -25,7 +25,6 @@
     }
     .app-logo {
       height: 60px;
-      margin-bottom: 20px;
     }
     h1 {
       margin-bottom: 16px;
@@ -73,24 +72,29 @@
       alert("ACCESS DENIED\n\nYou are not authorized to access this application.\nPlease contact the project administrator for access.");
     }
 
-    // Set logo based on domain
+    // Set logo and favicon based on domain
     window.onload = function () {
       const hostname = window.location.hostname;
       const logoImg = document.getElementById("appLogo");
+      const favicon = document.getElementById("favicon");
 
+      let logoPath = "";
       if (hostname === "g.quranmajeed.com") {
-        logoImg.src = "asset/img/gm-logo.png";
+        logoPath = "asset/img/qm-logo.png";
         logoImg.alt = "Quran Majeed Logo";
       } else if (hostname === "g.kitabi.pk") {
-        logoImg.src = "asset/img/kitabi-logo.webp";
+        logoPath = "asset/img/kitabi-logo.webp";
         logoImg.alt = "Kitabi Logo";
       } else if (hostname === "e.pakdata.com") {
-        logoImg.src = "asset/img/easyurdu-logo.jpg";
+        logoPath = "asset/img/easyurdu-logo.jpg";
         logoImg.alt = "Easy Urdu Logo";
       } else {
-        logoImg.src = "asset/img/pdms-logo.png";
+        logoPath = "asset/img/pdms-logo.png";
         logoImg.alt = "Pakistan Data Management Services Logo";
       }
+
+      logoImg.src = logoPath;
+      favicon.href = logoPath;
     };
   </script>
 </head>
