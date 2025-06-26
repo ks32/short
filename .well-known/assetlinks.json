@@ -10,5 +10,31 @@
         "39:FF:2E:E4:A0:47:FE:D0:BE:23:A2:3F:55:9A:70:C4:93:1B:CE:CF:6F:A9:4D:2E:8F:43:EE:83:4D:AD:0E:11"
       ]
     }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.pakdata.easyurdu",
+      "sha256_cert_fingerprints": [
+        "B7:8F:8B:D4:34:DC:BD:E2:41:9C:47:7C:67:3E:4F:E8:BA:41:04:2D:57:34:F9:DA:C7:EB:44:95:7E:D7:5F:A0"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.pakdata.kitabi",
+      "sha256_cert_fingerprints": [
+        "55:6A:DC:83:FE:CD:BF:01:C6:F1:D7:B4:6F:6D:D1:34:18:37:5A:1E:FA:B6:5E:77:84:76:D7:31:43:00:6A:F6"
+      ]
+    }
   }
 ]

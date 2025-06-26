@@ -95,7 +95,7 @@ export async function onRequestGet(context) {
         redirectUrl = "https://kitabi.pk/";
       }
     }
-    else if (origin === "https://e.pakdata..com") {
+    else if (origin === "https://e.pakdata.com") {
       if (/android/i.test(userAgent)) {
         redirectUrl = `https://play.google.com/store/apps/details?id=com.pakdata.easyurdu`;
       }
