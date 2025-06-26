@@ -70,4 +70,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"url":"https://131213.xyz"
 ```
 <!-- create separate cloudflare pages for separate app -->
 
+<!-- In Cloudflare dashboard there are three application short for quranmajeed, easyurdu-short for easyurdu and kitabi-short for kitabi app.  -->
+
+<!--  Also threre db's are different  -->
 
