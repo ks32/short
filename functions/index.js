@@ -34,11 +34,9 @@ export async function onRequestGet(context) {
       headers: { "Content-Type": "text/html;charset=UTF-8" },
     });
   } else {
-    // return new Response(loginHtml, {
-    //   headers: { "Content-Type": "text/html;charset=UTF-8" },
-    // });
-    const redirectUrl = "https://pakdata.com/";
-    return Response.redirect(redirectUrl, 302);
+    return new Response(loginHtml, {
+      headers: { "Content-Type": "text/html;charset=UTF-8" },
+    });
   }
 }
 
