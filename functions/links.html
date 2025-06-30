@@ -168,36 +168,45 @@
 
   <script>
     let page = 0;
-    let limit = 20;
+    let limit = 50;
     let totalCount = 0;
     let searchTerm = '';
-
+  
+    const pageCache = {}; // key = `${searchTerm}|${limit}|${page}`
+  
     const tbody = document.querySelector('#links-table tbody');
     const footer = document.getElementById('table-footer');
     const limitSelect = document.getElementById('limit-select');
     const searchInput = document.getElementById('search-input');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
-
-    async function fetchLinks(page, limit, search = '') {
+  
+    async function fetchLinksFromAPI(page, limit, search = '') {
       const res = await fetch(`/linklist?page=${page}&limit=${limit}&search=${encodeURIComponent(search)}`);
       return await res.json();
     }
-
+  
     async function fetchTotalCount(search = '') {
       const res = await fetch(`/linkcount?search=${encodeURIComponent(search)}`);
       const { count } = await res.json();
-      totalCount = count;
+      return count;
     }
-
+  
     async function renderTable() {
       tbody.innerHTML = "";
-      await fetchTotalCount(searchTerm);
-      const data = await fetchLinks(page, limit, searchTerm);
-
+      const cacheKey = `${searchTerm}|${limit}|${page}`;
+      let data = [];
+  
+      if (pageCache[cacheKey]) {
+        data = pageCache[cacheKey];
+      } else {
+        data = await fetchLinksFromAPI(page, limit, searchTerm);
+        pageCache[cacheKey] = data;
+      }
+  
       const start = page * limit + 1;
       const end = Math.min(start + data.length - 1, totalCount);
-
+  
       data.forEach(link => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
@@ -209,39 +218,51 @@
         `;
         tbody.appendChild(tr);
       });
-
+  
       footer.textContent = `${start} - ${end} of ${totalCount}`;
-
       prevBtn.disabled = page === 0;
       nextBtn.disabled = end >= totalCount;
     }
-
-    limitSelect.addEventListener('change', () => {
+  
+    function pageCacheReset() {
+      for (let key in pageCache) delete pageCache[key];
+    }
+  
+    limitSelect.addEventListener('change', async () => {
       limit = parseInt(limitSelect.value);
       page = 0;
+      pageCacheReset();
+      totalCount = await fetchTotalCount(searchTerm);
       renderTable();
     });
-
-    searchInput.addEventListener('input', () => {
+  
+    searchInput.addEventListener('input', async () => {
       page = 0;
       searchTerm = searchInput.value.trim();
+      pageCacheReset();
+      totalCount = await fetchTotalCount(searchTerm);
       renderTable();
     });
-
+  
     prevBtn.addEventListener('click', () => {
       if (page > 0) {
         page--;
         renderTable();
       }
     });
-
+  
     nextBtn.addEventListener('click', () => {
       page++;
       renderTable();
     });
-
-    renderTable();
+  
+    // Initial load
+    (async () => {
+      totalCount = await fetchTotalCount();
+      renderTable();
+    })();
   </script>
+  
 </body>
 
 </html>
