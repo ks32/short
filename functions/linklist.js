@@ -27,7 +27,7 @@ export async function onRequestGet(context) {
     bindings.push(`%${search}%`, `%${search}%`);
   }
 
-  query += where + ` ORDER BY create_time DESC LIMIT ? OFFSET ?`;
+  query += where + ` ORDER BY create_time ASC LIMIT ? OFFSET ?`;
   bindings.push(limit, offset);
 
   const { results } = await env.DB.prepare(query).bind(...bindings).all();

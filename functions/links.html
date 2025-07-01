@@ -126,7 +126,30 @@
     <div class="search-box">
       <input type="text" id="search-input" placeholder="Search by slug or URL..." />
     </div>
+  </div>
 
+  <!-- Table -->
+  <table id="links-table">
+    <thead>
+      <tr>
+        <th>Slug</th>
+        <th>Original URL</th>
+        <th>Short Link</th>
+        <th>Total Clicked</th>
+        <th>Domain</th>
+        <th>Created By</th>
+        <th>Created Time</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+    <tfoot>
+      <tr>
+        <td colspan="6" id="table-footer" style="text-align: right; font-weight: bold; padding-top: 1rem;"></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <div style="justify-content: end; display: flex; margin-top: 10px;">
     <div class="pagination-controls">
       <label for="limit-select">Rows:</label>
       <select id="limit-select">
@@ -146,25 +169,6 @@
       </button>
     </div>
   </div>
-
-  <!-- Table -->
-  <table id="links-table">
-    <thead>
-      <tr>
-        <th>Slug</th>
-        <th>Original URL</th>
-        <th>Short Link</th>
-        <th>Total Clicked</th>
-        <th>Domain</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-    <tfoot>
-      <tr>
-        <td colspan="5" id="table-footer" style="text-align: right; font-weight: bold; padding-top: 1rem;"></td>
-      </tr>
-    </tfoot>
-  </table>
 
   <script>
     let page = 0;
@@ -215,6 +219,8 @@
           <td><a href="${link.domain}/${link.slug}" target="_blank">${window.location.origin}/${link.slug}</a></td>
           <td>${link.opened}</td>
           <td>${link.domain}</td>
+          <td>${link.created_by}</td>
+          <td>${link.create_time}</td>
         `;
         tbody.appendChild(tr);
       });

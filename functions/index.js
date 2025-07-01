@@ -4,9 +4,9 @@ import loginHtml from './login.html';
 export async function onRequestGet(context) {
   const { request, env } = context;
   const url = new URL(request.url);
+  const origin = `${url.protocol}//${url.hostname}`;
   const userAgent = request.headers.get('user-agent') || '';
   const hasDeepLinkParams = url.searchParams.size;
-
   if (hasDeepLinkParams) {
     // Device detection
     const isAndroid = /android/i.test(userAgent);
@@ -34,9 +34,18 @@ export async function onRequestGet(context) {
       headers: { "Content-Type": "text/html;charset=UTF-8" },
     });
   } else {
-    return new Response(loginHtml, {
-      headers: { "Content-Type": "text/html;charset=UTF-8" },
-    });
+    if (origin === "https://g.quranmajeed.com") {
+      return Response.redirect('https://quranmajeed.com/', 302);
+    }
+    else if (origin === "https://g.kitabi.pk") {
+        return Response.redirect('https://kitabi.pk/', 302);
+    }
+    else if (origin === "https://e.pakdata.com") {
+      return Response.redirect('https://easyurdu.pk/', 302);
+    }
+    else {
+      return Response.redirect('https://quranmajeed.com/', 302);
+    }
   }
 }
 

@@ -31,6 +31,7 @@ export async function onRequest(context) {
     const clientIP = request.headers.get("x-forwarded-for") || request.headers.get("clientIP");
     const userAgent = request.headers.get("user-agent");
     const origin = `${originurl.protocol}//${originurl.hostname}`;
+    let userName = await getUserName(request, env);
 
     const options = {
         timeZone: 'Asia/Karachi',
@@ -111,9 +112,9 @@ export async function onRequest(context) {
         const slug2 = slug ? slug : generateRandomString(4);
 
         await env.DB.prepare(`
-            INSERT INTO links (url, slug, ip, status, ua, create_time, domain)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        `).bind(url, slug2, clientIP, 1, userAgent, formattedDate, origin).run();
+        INSERT INTO links (url, slug, ip, status, ua, create_time, domain, created_by)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    `).bind(url, slug2, clientIP, 1, userAgent, formattedDate, origin, userName || null).run();
 
         return Response.json({ slug: slug2, link: `${origin}/${slug2}` }, {
             headers: corsHeaders,
@@ -127,3 +128,18 @@ export async function onRequest(context) {
         });
     }
 }
+
+async function getUserName(request, env) {
+    const cookie = request.headers.get("cookie") || "";
+    const userEncoded = cookie.match(/user=([^;]+)/)?.[1];
+  
+    if (!userEncoded) return false;
+  
+    try {
+      const user = JSON.parse(decodeURIComponent(userEncoded));
+      return user.name || false;
+    } catch (err) {
+      console.warn("Failed to parse user cookie:", err);
+      return false;
+    }
+  }

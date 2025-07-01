@@ -16,8 +16,8 @@ export async function onRequestGet(context) {
   };
 
   // Handle root `/`
+  let isLoggedIn = await checkLoginStatus(request, env);
   if (pathname === "/") {
-    const isLoggedIn = false;
 
     if (isLoggedIn) {
       return new Response(login, {
@@ -30,10 +30,17 @@ export async function onRequestGet(context) {
     }
   }
   if (reservedRoutes[params.id]) {
-    return new Response(reservedRoutes[params.id], {
-      status: 200,
-      headers: { "Content-Type": "text/html;charset=UTF-8" },
-    });
+    if(isLoggedIn){
+      return new Response(reservedRoutes[params.id], {
+        status: 200,
+        headers: { "Content-Type": "text/html;charset=UTF-8" },
+      });
+    }
+    else{
+      return new Response(login, {
+        headers: { "Content-Type": "text/html;charset=UTF-8" },
+      });
+    }
   }
 
   const clientIP = request.headers.get("x-forwarded-for") || request.headers.get("clientIP");
@@ -115,4 +122,14 @@ export async function onRequestGet(context) {
     console.error(error);
     return Response.redirect(Url.url, 302);
   }
+}
+
+async function checkLoginStatus(request, env) {
+  const cookie = request.headers.get("cookie") || "";
+  const token = cookie.match(/token=([^;]+)/)?.[1];
+
+  if (!token) return false;
+
+  // You can validate the token here using KV or JWT
+  return true;
 }
